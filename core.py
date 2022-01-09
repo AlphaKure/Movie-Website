@@ -23,10 +23,14 @@ def Adminlogin():
             return flask.render_template('Adminlogin.html',ERROR='管理員帳號或密碼錯誤')
     return flask.render_template('Adminlogin.html')
 
-@app.route('/Dashboard')
+@app.route('/Dashboard',methods=["POST","GET"])
 def Dashboard():
+    global isAdmin
+    if flask.request.method=='POST':
+            isAdmin=False
+            return flask.redirect(flask.url_for('Adminlogin'))
     if isAdmin:
-        return "Welcome!"
+        return flask.render_template('Dashboard.html')
     else:
         return "You don't have Authority!"
 

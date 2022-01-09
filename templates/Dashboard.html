@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
     <head>
         <title>後臺系統</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/css/Dashboard.css">
     </head>
     <body>
-        <div class="title">後臺系統</div>
-        <div class="offer">優惠訊息
-            <div class="information">此區用來更新首頁的優惠訊息</div>
+        <div class="Nav">後臺系統</div>
+        <div class="offer">
+            <div class="title">優惠訊息</div>
+            <div class="information">※此區用來更新首頁的優惠訊息</div>
+            <form>
+                <p>新增優惠訊息: <input type="text">
+                <button>送出</button>
+                </p>
+            </form>
+        </div>
+        <div class="member">
+        </div>
+        <div class="logout">
+            <form method="post" action="">
+                <button>登出</button>
+            </form>
         </div>
     </body>
 </html>

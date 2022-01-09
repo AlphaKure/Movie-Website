@@ -1,0 +1,29 @@
+@charset "UTF-8";
+.Nav {
+  font-family: 微軟正黑體;
+  font-size: xx-large;
+  font-weight: bolder;
+  padding: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  background-color: gray;
+}
+
+.offer {
+  font-family: 微軟正黑體;
+  font-size: xx-large;
+  padding-top: 4vh;
+}
+
+.offer .title {
+  font-weight: bolder;
+  color: blue;
+}
+
+.offer .information {
+  padding-top: 5px;
+  font-size: large;
+}
