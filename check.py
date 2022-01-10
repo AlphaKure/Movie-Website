@@ -6,11 +6,8 @@ def check(input_account,input_password):
         f.close()
     account=admin['account']
     password=str(admin['password'])
-    if input_account==account:
-        if input_password==password:
-            return True
-        else:
-            return False
+    if input_account==account and input_password==password:
+        return True
     else:
         return False
 
