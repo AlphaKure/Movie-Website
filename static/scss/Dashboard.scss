@@ -3,7 +3,7 @@
     font-size: xx-large;
 }
 
-.Nav{
+#Nav{
     @include font();
     font-weight:bolder;
     padding: 5px;
@@ -15,15 +15,24 @@
     background-color:gray ;
 }
 
-.offer{
+#offer{
     @include font();
-    padding-top:4vh;
-    .title{
+    padding-top:5vh;
+    #title{
         font-weight:bolder;
         color:blue;
     }
-    .information{
+    #information{
         padding-top: 5px;
         font-size: large;
+    }
+    #addoffer{
+        @include font();
+        font-size: medium;
+        #content{
+            width: 25%;
+            @include font();
+            font-size:medium;
+        }
     }
 }

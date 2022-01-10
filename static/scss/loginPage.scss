@@ -19,7 +19,7 @@ html{
     scroll-behavior: smooth;
 }
 
-.ERROR{
+#ERROR{
     @include font();
     padding: 10px;
     position: fixed;
@@ -30,7 +30,7 @@ html{
     background-color: red;
 }
 
-.login{
+#login{
     @include font();
     @include center();
     height:50vh;
@@ -52,7 +52,7 @@ html{
         border-color:white;
     }
 }
-.warning{
+#warning{
     @include font();
     text-align: center;
     color:red;

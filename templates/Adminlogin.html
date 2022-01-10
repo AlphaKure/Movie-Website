@@ -4,21 +4,22 @@
     <meta charset="utf-8">
     <title>後臺登入</title>
     <link rel="stylesheet" href="/static/css/loginPage.css">
+    <link rel="icon" href="/static/pic/gear.svg">
 </head>
 <body>
     {% if ERROR %}
-    <div class="ERROR">
+    <div id="ERROR">
         {{ERROR}}
     </div>
     {% endif %}
-    <div class="login">
+    <div id="login">
         <form method="POST" action="">
             <p class="account" >管理員帳號: <input type="text" name="account"></p>
             <p class="password">管理員密碼: <input type="password" name="password"></p>
             <p class="button"><button>確認</button></p>
         </form>
     </div>
-    <div class="warning">
+    <div id="warning">
         <p> ※此區為"管理員"登入頁面，會員請勿由此登入。</p>
     </div>
 </body>
