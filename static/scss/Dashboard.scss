@@ -1,38 +1,25 @@
 @mixin font {
     font-family:微軟正黑體;
-    font-size: xx-large;
+    font-size: x-large;
 }
-
-#Nav{
+html{
+    background-color: darkgray;
+}
+#title{
     @include font();
-    font-weight:bolder;
-    padding: 5px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    font-weight: bolder;
     color: white;
-    background-color:gray ;
 }
-
-#offer{
-    @include font();
-    padding-top:5vh;
-    #title{
-        font-weight:bolder;
-        color:blue;
-    }
-    #information{
-        padding-top: 5px;
-        font-size: large;
-    }
-    #addoffer{
+#logout{
+    bottom:1%;
+    right:1%;
+    position: fixed;
+    button{
         @include font();
-        font-size: medium;
-        #content{
-            width: 25%;
-            @include font();
-            font-size:medium;
-        }
+        font-weight: bolder;
+        background-color: azure;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 10px;
     }
 }
