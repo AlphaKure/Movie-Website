@@ -8,7 +8,7 @@ isAdmin=False
 
 @app.route('/')
 def main():
-    return flask.redirect(flask.url_for('login'))
+    return flask.redirect(flask.url_for('Home'))
 
 @app.route('/Adminlogin',methods=["POST","GET"])
 def Adminlogin():
@@ -43,13 +43,20 @@ def login():
     if flask.request.method=='POST':
         input_account=flask.request.values.get('Username')
         input_password=flask.request.values.get('Password')
-        islogin=check(input_account,input_password,"user")
+        if input_account=="" or input_password=="":
+            islogin=False
+        else:
+            islogin=check(input_account,input_password,"user")
         if islogin==True:
             return "Welcome!"
         else:
-            return "Error!"
+            flask.flash('登入失敗 請確認帳號和密碼')
     return flask.render_template('login.html')
 
+@app.route('/home')
+def Home():
+    return flask.render_template('come_soon.html')
 
 if __name__ == '__main__':
-     app.run(host='127.0.0.1',port=8000,debug=True)
+    app.secret_key="Movie-website"
+    app.run(host='127.0.0.1',port=8000,debug=True)
