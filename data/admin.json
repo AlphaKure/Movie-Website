@@ -1,4 +1,6 @@
-{
+[
+    {
     "account":"admin",
     "password":"1234"
-}
+    }
+]
