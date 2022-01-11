@@ -1,9 +1,5 @@
 [
     {
-        "account":"AlphaTest",
-        "password":"Test123@"
-    },
-    {
         "account":"123",
         "password":"456"
     }
