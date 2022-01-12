@@ -1,6 +1,6 @@
 import ujson
 
-def register(new_account,new_password):
+def register_acc(new_account,new_password):
     new_account=str(new_account)
     new_password=str(new_password)
     isexist=False
@@ -28,4 +28,4 @@ def register(new_account,new_password):
         return "Success!"
 
 if __name__=='__main__':
-    print(register("123","456"))
+    print(register_acc("123","456"))
