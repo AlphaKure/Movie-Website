@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,6 +55,7 @@
                     </li>
                 </ul>
             </div>
+            {% if islogin %}
             <div class="favorite">
                 <a href="#">
                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -66,15 +68,24 @@
                     來去訂票
                 </a>
             </div>
+            {% endif %}
             <div class="o"></div>
             <div class="user">
-                <a href="/login">
+                {% if islogin==False %}
+                <a href="/login" target="_self">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     登入
                 </a>
+                {% endif %}
+                {% if islogin %}
+                <a href="/logout" target="_self">
+                    登出
+                </a>
+                {% endif %}
             </div>
         </nav>
     </div>
     <div style="text-align: center; font-size: xx-large;margin-top: 50vh; font-weight:bolder;">COME SOON</div>
 </body>
+
 </html>

@@ -56,6 +56,7 @@
                     </li>
                 </ul>
             </div>
+            {% if islogin %}
             <div class="favorite">
                 <a href="#">
                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -68,12 +69,20 @@
                     來去訂票
                 </a>
             </div>
+            {% endif %}
             <div class="o"></div>
             <div class="user">
+            {% if islogin==False %}
                 <a href="/login" target="_self">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     登入
                 </a>
+            {% endif %}
+            {% if islogin %}
+            <a href="/logout" target="_self" >
+                登出
+            </a>
+            {% endif %}
             </div>
         </nav>
     </div>
