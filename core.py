@@ -1,10 +1,12 @@
 import flask
 from check import check
+from register import register
 
 app=flask.Flask(__name__)
 
 islogin=False
 isAdmin=False
+nowuser=""
 
 @app.route('/')
 def main():
@@ -40,22 +42,29 @@ def Dashboard():
 @app.route('/login',methods=["POST","GET"])
 def login():
     global islogin
+    global nowuser
     if flask.request.method=='POST':
         input_account=flask.request.values.get('Username')
         input_password=flask.request.values.get('Password')
-        if input_account=="" or input_password=="":
-            islogin=False
-        else:
-            islogin=check(input_account,input_password,"user")
+        islogin=check(input_account,input_password,"user")
         if islogin==True:
-            return "Welcome!"
+            nowuser=input_account
+            return flask.redirect(flask.url_for('Home'))
         else:
             flask.flash('登入失敗 請確認帳號和密碼')
-    return flask.render_template('login.html')
+    return flask.render_template('login.html',islogin=islogin)
+
+@app.route('/logout')
+def logout():
+    global islogin
+    global nowuser
+    nowuser=""
+    islogin=False
+    return flask.redirect(flask.url_for('Home'))
 
 @app.route('/home')
 def Home():
-    return flask.render_template('come_soon.html')
+    return flask.render_template('come_soon.html',islogin=islogin)
 
 if __name__ == '__main__':
     app.secret_key="Movie-website"
