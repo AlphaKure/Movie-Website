@@ -89,9 +89,17 @@
         </nav>
     </div>
     {% for message in get_flashed_messages() %}
-    <div class="alert alert-danger" id="alert" role="alert">
-        <i class="bi bi-exclamation-triangle-fill"></i>{{ message }}
-    </div>
+        {% if message %}
+            {% if message=='註冊已完成 請重新登入' %}
+            <div class="alert alert-success" id="alert" role="alert">   
+                {{message}}
+            </div>
+            {% else %}
+            <div class="alert alert-danger" id="alert" role="alert">            
+                <i class="bi bi-exclamation-triangle-fill"></i>{{ message }}
+            </div>
+            {% endif %}
+        {% endif %}
     {% endfor %}
     <div class="content">
         <form action="" class="login" method="POST">
@@ -100,9 +108,9 @@
             <input type="password" name="Password" id="Password" placeholder="Password 密碼" required/>
             <input type="submit" value="Submit 提交" />
         </form>
-        <form action="" class="register">
+        <form action="" class="register" method="GET">
             <h3>沒有帳號嗎？</h3>
-            <input type="button" value="sign up 註冊" />
+            <a href="/register" target="_self" ><input type="button" value="sign up 註冊" /></a>
         </form>
     </div>
 </body>
