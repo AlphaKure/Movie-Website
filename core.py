@@ -5,7 +5,6 @@ from register import register_acc
 app=flask.Flask(__name__)
 
 isAdmin=False
-nowuser=""
 
 @app.template_global()
 def getcookie():
@@ -17,18 +16,25 @@ def main():
 
 @app.route('/home')
 def Home():
+    return flask.render_template('home.html')
+
+@app.route('/future')
+def future():
     return flask.render_template('come_soon.html')
+
+@app.route('/ticketln')
+def ticketln():
+    return flask.render_template('ticketln.html')
 
 @app.route('/login',methods=["POST","GET"])
 def login():
-    global nowuser
     if flask.request.method=='POST':
         input_account=flask.request.values.get('Username')
         input_password=flask.request.values.get('Password')
         if check(input_account,input_password,"user"):
-            nowuser=input_account
             resp = flask.make_response(flask.redirect('/home'))
             resp.set_cookie('logged_in',"Y",expires=None)
+            resp.set_cookie('nowuser',input_account,expires=None)
             return resp
         else:
             flask.flash('登入失敗 請確認帳號和密碼')
@@ -36,10 +42,9 @@ def login():
 
 @app.route('/logout')
 def logout():
-    global nowuser
-    nowuser=""
     resp = flask.make_response(flask.redirect('/home'))
     resp.set_cookie('logged_in',"N",expires=0)
+    resp.set_cookie('nowuser',"",expires=None)
     return resp
 
 @app.route('/register',methods=["POST","GET"])
@@ -90,5 +95,4 @@ def Dashboard():
 
 app.secret_key="Movie-website"
 if __name__ == '__main__':
-    
     app.run(host='127.0.0.1',port=8000,debug=True)
