@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ticketln</title>
-    <link rel="stylesheet" href="/static/css/ticketln.css" />
+    <title>訂票系統</title>
     <link rel="icon" href="/static/pic/house-door.svg">
     <script src="https://kit.fontawesome.com/e8c62160a4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/ticketln.css" />
 </head>
 
 <body>
@@ -17,88 +17,88 @@
         <div class="content">
             <div class="middle">
                 <div class="left">
-                    <form action="">
+                    <form method="POST" action="">
                         <fieldset>
                             <legend>基本資料</legend>
                             <p class="id">
-                                姓名： <input type="name" name="txtMail"> <br />
-                                生日： <input type="date" name="txtMail"> <br />
-                                身份證末四碼： <input type="text" name="txtMail"> <br />
-                                手機門號： <input type="text" name="txtMail"> <br />
-                                電子郵件： <input type="email" name="txtMail"> <br />
+                                姓名： <input type="name" name="name" required> <br />
+                                生日： <input type="date" name="birthday" required> <br />
+                                身份證末四碼： <input type="text" name="ID" required> <br />
+                                手機門號： <input type="text" name="cellphone" required> <br />
+                                電子郵件： <input type="email" name="email" required> <br />
                             </p>
                         </fieldset>
                         <fieldset>
                             <legend>訂票資訊</legend>
-                            <select>
-                                <option>選擇電影</option> <br />
-                                <option>天能</option>
-                                <option>月老</option>
-                                <option>蜘蛛人：無家日</option>
-                                <option>獵魂者</option>
+                            <select name="choose_movie" required>
+                                <option value="0">選擇電影</option> <br />
+                                <option value="1">天能</option>
+                                <option value="2">月老</option>
+                                <option value="3">蜘蛛人：無家日</option>
+                                <option value="4">獵魂者</option>
                             </select>
                             <br />
                             <p>
-                                <input type="radio" name="op2" id="op2" value="1" />
+                                <input type="radio" name="op" id="op1" value="0" checked/>
                                 <label for="op1">數位2D</label>
-                                <input type="radio" name="op2" id="op2" value="2" />
+                                <input type="radio" name="op" id="op2" value="1" />
                                 <label for="op2">數位3D</label>
-                                <input type="radio" name="op2" id="op2" value="3" />
+                                <input type="radio" name="op" id="op3" value="2" />
                                 <label for="op3">IMAX</label>
-                                <input type="radio" name="op2" id="op2" value="4" />
+                                <input type="radio" name="op" id="op4" value="3" />
                                 <label for="op4">4DX</label>
                             </p>
                             <br />
-                            <select>
-                                <option>選擇電影院</option></br>
-                                <option>斗六環球中華影城</option>
-                                <option>虎尾白宮影城</option>
-                                <option>嘉義秀泰影城</option>
-                                <option>嘉年華影城</option>
+                            <select name="cinema" required>
+                                <option value="0">選擇電影院</option></br>
+                                <option value="1">斗六環球中華影城</option>
+                                <option value="2">虎尾白宮影城</option>
+                                <option value='3'>嘉義秀泰影城</option>
+                                <option value="4">嘉年華影城</option>
                             </select>
                             <br />
-                            <select>
-                                <option>選擇場次</option>
-                                <option>A</option>
-                                <option>B</option>
-                                <option>C</option>
-                                <option>D</option>
-                                <option>E</option>
+                            <select name="session" required>
+                                <option value="0">選擇場次</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                                <option value="5">E</option>
                             </select>
                             <br />
-                            <select>
-                                <option>選擇座位（排）</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
+                            <select name="seat_row" required>
+                                <option value="0">選擇座位（排）</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                             <br />
-                            <select>
-                                <option>選擇座位（號）</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
+                            <select name="seat_num" required>
+                                <option value="0">選擇座位（號）</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                             <br />
-                            <select>
-                                <option>選擇餐飲/優惠套餐</option>
-                                <option>無</option>
-                                <option>爆米花（單點）</option>
-                                <option>吉拿棒（單點）</option>
-                                <option>可樂（單點）</option>
-                                <option>雪碧（單點）</option>
-                                <option>A套餐（爆米花 + 可樂/雪碧）</option>
-                                <option>B套餐（爆米花 + 吉拿棒 + 可樂/雪碧）</option>
-                                <option>C套餐（爆米花*2 + 可樂/雪碧*2）</option>
-                                <option>D套餐（爆米花*3 + 可樂/雪碧*3）</option>
+                            <select name="food" required>
+                                <option value="0">選擇餐飲/優惠套餐</option>
+                                <option value="1">無</option>
+                                <option value="2">爆米花（單點）</option>
+                                <option value="3">吉拿棒（單點）</option>
+                                <option value="4">可樂（單點）</option>
+                                <option value="5">雪碧（單點）</option>
+                                <option value="6">A套餐（爆米花 + 可樂/雪碧）</option>
+                                <option value="7">B套餐（爆米花 + 吉拿棒 + 可樂/雪碧）</option>
+                                <option value="8">C套餐（爆米花*2 + 可樂/雪碧*2）</option>
+                                <option value="9">D套餐（爆米花*3 + 可樂/雪碧*3）</option>
                             </select>
                             <br />
                         </fieldset>
