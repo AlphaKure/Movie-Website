@@ -1,6 +1,6 @@
 @mixin font {
     font-family:微軟正黑體;
-    font-size: x-large;
+    font-size: xx-large;
 }
 html{
     background-color: darkgray;
@@ -9,6 +9,19 @@ html{
     @include font();
     font-weight: bolder;
     color: white;
+}
+.card{
+    @include font();
+    .card-header{
+        justify-content: center;
+    }
+    #card_title{
+        padding-top: 2vh;
+        font-weight: bolder;
+    }
+    table{
+        font-size: medium;
+    }
 }
 #logout{
     bottom:1%;
