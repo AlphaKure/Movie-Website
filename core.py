@@ -1,11 +1,11 @@
+from email.policy import default
+import re
 import flask
 from check import check
 from register import register_acc
 from ticket import ticketjson_gen
 
 app=flask.Flask(__name__)
-
-isAdmin=False
 
 @app.template_global()
 def getcookie():
@@ -84,8 +84,8 @@ def movie2():
 
 @app.route('/Adminlogin',methods=["POST","GET"])
 def Adminlogin():
-    global isAdmin
-    if isAdmin==True:
+    isAdmin=flask.request.cookies.get('isAdmin')
+    if isAdmin=='Y':
         return flask.redirect(flask.url_for('Dashboard'))
     else:
         if flask.request.method == 'POST':
@@ -93,18 +93,21 @@ def Adminlogin():
             input_password=flask.request.values.get('password')
             isAdmin=check(input_account,input_password,"Admin")
             if isAdmin==True:
-                return flask.redirect(flask.url_for('Dashboard'))
+                resq=flask.make_response(flask.redirect('/Dashboard'))
+                resq.set_cookie('isAdmin','Y',expires=None)
+                return resq
             else:
                 return flask.render_template('Adminlogin.html',ERROR='管理員帳號或密碼錯誤')
         return flask.render_template('Adminlogin.html')
 
 @app.route('/Dashboard',methods=["POST","GET"])
 def Dashboard():
-    global isAdmin
+    isAdmin=flask.request.cookies.get('isAdmin')
     if flask.request.method=='POST':
-            isAdmin=False
-            return flask.redirect(flask.url_for('Adminlogin'))
-    if isAdmin:
+            resq=flask.make_response(flask.redirect('/Adminlogin'))
+            resq.set_cookie('isAdmin','N',expires=None)
+            return resq
+    if isAdmin=='Y':
         return flask.render_template('Dashboard.html')
     else:
         return "You don't have Authority!"
