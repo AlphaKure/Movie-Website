@@ -4,9 +4,12 @@ from register import register_acc
 
 app=flask.Flask(__name__)
 
-islogin=False
 isAdmin=False
 nowuser=""
+
+@app.template_global()
+def getcookie():
+    return True if flask.request.cookies.get('logged_in') == "Y" else False
 
 @app.route('/')
 def main():
@@ -14,34 +17,33 @@ def main():
 
 @app.route('/home')
 def Home():
-    return flask.render_template('come_soon.html',islogin=islogin)
+    return flask.render_template('come_soon.html')
 
 @app.route('/login',methods=["POST","GET"])
 def login():
-    global islogin
     global nowuser
     if flask.request.method=='POST':
         input_account=flask.request.values.get('Username')
         input_password=flask.request.values.get('Password')
-        islogin=check(input_account,input_password,"user")
-        if islogin==True:
+        if check(input_account,input_password,"user"):
             nowuser=input_account
-            return flask.redirect(flask.url_for('Home'))
+            resp = flask.make_response(flask.redirect('/home'))
+            resp.set_cookie('logged_in',"Y",expires=None)
+            return resp
         else:
             flask.flash('登入失敗 請確認帳號和密碼')
-    return flask.render_template('login.html',islogin=islogin)
+    return flask.render_template('login.html')
 
 @app.route('/logout')
 def logout():
-    global islogin
     global nowuser
     nowuser=""
-    islogin=False
-    return flask.redirect(flask.url_for('Home'))
+    resp = flask.make_response(flask.redirect('/home'))
+    resp.set_cookie('logged_in',"N",expires=0)
+    return resp
 
 @app.route('/register',methods=["POST","GET"])
 def register():
-    global islogin
     if flask.request.method=='POST':
         input_account=flask.request.values.get('account')
         input_password=flask.request.values.get('password')
@@ -57,7 +59,7 @@ def register():
             else:
                 flask.flash('註冊已完成 請重新登入')
                 return flask.redirect(flask.url_for('login'))
-    return flask.render_template('register.html',islogin=islogin)
+    return flask.render_template('register.html')
 
 @app.route('/Adminlogin',methods=["POST","GET"])
 def Adminlogin():
@@ -86,6 +88,7 @@ def Dashboard():
     else:
         return "You don't have Authority!"
 
+app.secret_key="Movie-website"
 if __name__ == '__main__':
-    app.secret_key="Movie-website"
+    
     app.run(host='127.0.0.1',port=8000,debug=True)

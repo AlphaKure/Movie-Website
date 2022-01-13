@@ -17,76 +17,7 @@
 </head>
 
 <body>
-    <div class="head" id="fixed-header-slide">
-        <nav class="nav" id="fixed-header-wrap">
-            <div class="logo">
-                logo.jpg
-            </div>
-            <div class="home">
-                <a href="/home" target="_self">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    首頁
-                </a>
-            </div>
-            <div class="menu">
-                <a href="#">
-                    <i class="fa fa-list-ul" aria-hidden="true"></i>
-                    類型
-                </a>
-                <ul id="test1" class="option-cont">
-                    <li>
-                        <a href="#" target="_self">
-                            科幻
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_self">
-                            愛情
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_self">
-                            動作
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_self">
-                            懸疑
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            {% if islogin %}
-            <div class="favorite">
-                <a href="#">
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                    我的最愛
-                </a>
-            </div>
-            <div class="booking">
-                <a href="#" target="_self">
-                    <i class="fa fa-ticket" aria-hidden="true"></i>
-                    來去訂票
-                </a>
-            </div>
-            {% endif %}
-            <div class="o"></div>
-            <div class="user">
-                {% if islogin==False %}
-                <a href="/login" target="_self">
-                    <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    登入
-                </a>
-                {% endif %}
-                {% if islogin %}
-                <a href="/logout" target="_self">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    登出
-                </a>
-                {% endif %}
-            </div>
-        </nav>
-    </div>
+    {% include "header.html" %}
     <div style="text-align: center; font-size: xx-large;margin-top: 50vh; font-weight:bolder;">COME SOON</div>
 </body>
 
