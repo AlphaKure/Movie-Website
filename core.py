@@ -1,6 +1,5 @@
-from email.policy import default
-import re
 import flask
+import ujson
 from check import check
 from register import register_acc
 from ticket import ticketjson_gen
@@ -102,15 +101,32 @@ def Adminlogin():
 
 @app.route('/Dashboard',methods=["POST","GET"])
 def Dashboard():
-    isAdmin=flask.request.cookies.get('isAdmin')
-    if flask.request.method=='POST':
-            resq=flask.make_response(flask.redirect('/Adminlogin'))
-            resq.set_cookie('isAdmin','N',expires=None)
-            return resq
+    isAdmin=flask.request.cookies.get('isAdmin')            
     if isAdmin=='Y':
         return flask.render_template('Dashboard.html')
     else:
         return "You don't have Authority!"
+
+@app.route('/Adminlogout')
+def Adminlogout():
+    isAdmin=flask.request.cookies.get('isAdmin')
+    if isAdmin=='Y':
+        resq=flask.make_response(flask.redirect('/Adminlogin'))
+        resq.set_cookie('isAdmin','N',expires=None)
+        return resq
+    else:
+        return flask.redirect('/Adminlogin')
+
+@app.route('/getjson/<dataname>')
+def getjson(dataname):
+    isAdmin=flask.request.cookies.get('isAdmin')
+    if isAdmin=='Y':
+        with open('data/'+dataname+'.json','r',encoding='utf-8')as f:
+            data=ujson.load(f)
+            f.close()
+        return flask.jsonify(data)
+    else:
+        return flask.redirect('/Adminlogin')
 
 app.secret_key="Movie-website"
 if __name__ == '__main__':
