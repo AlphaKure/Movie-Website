@@ -1,6 +1,7 @@
 import flask
 from check import check
 from register import register_acc
+from ticket import ticketjson_gen
 
 app=flask.Flask(__name__)
 
@@ -22,9 +23,16 @@ def Home():
 def future():
     return flask.render_template('come_soon.html')
 
-@app.route('/ticketln')
+@app.route('/ticketln',methods=["POST","GET"])
 def ticketln():
-    return flask.render_template('ticketln.html')
+    if flask.request.cookies.get('logged_in') != "Y":
+        return flask.redirect(flask.url_for('login'))
+    else:
+        if flask.request.method=='POST':
+            nowuser=flask.request.cookies.get('nowuser')
+            ticketjson_gen(nowuser)
+            return flask.redirect(flask.url_for('Home'))
+        return flask.render_template('ticketln.html')
 
 @app.route('/login',methods=["POST","GET"])
 def login():
