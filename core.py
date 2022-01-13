@@ -74,6 +74,14 @@ def register():
                 return flask.redirect(flask.url_for('login'))
     return flask.render_template('register.html')
 
+@app.route('/movie1')
+def movie1():
+    return flask.render_template('movie1.html')
+
+@app.route('/movie2')
+def movie2():
+    return flask.render_template('movie2.html')
+
 @app.route('/Adminlogin',methods=["POST","GET"])
 def Adminlogin():
     global isAdmin
