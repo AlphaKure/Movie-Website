@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ticketln</title>
+    <link rel="stylesheet" href="/static/css/ticketln.css" />
+    <script src="https://kit.fontawesome.com/e8c62160a4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div data-role="page" class="body">
+        {% include "header.html" %}
+        <div class="content">
+            <div class="middle">
+                <div class="left">
+                    <form action="">
+                        <fieldset>
+                            <legend>基本資料</legend>
+                            <p class="id">
+                                姓名： <input type="name" name="txtMail"> <br />
+                                生日： <input type="date" name="txtMail"> <br />
+                                身份證末四碼： <input type="text" name="txtMail"> <br />
+                                手機門號： <input type="text" name="txtMail"> <br />
+                                電子郵件： <input type="email" name="txtMail"> <br />
+                            </p>
+                        </fieldset>
+                        <fieldset>
+                            <legend>訂票資訊</legend>
+                            <select>
+                                <option>選擇電影</option> <br />
+                                <option>天能</option>
+                                <option>月老</option>
+                                <option>蜘蛛人：無家日</option>
+                                <option>獵魂者</option>
+                            </select>
+                            <br />
+                            <p>
+                                <input type="radio" name="op2" id="op2" value="1" />
+                                <label for="op1">數位2D</label>
+                                <input type="radio" name="op2" id="op2" value="2" />
+                                <label for="op2">數位3D</label>
+                                <input type="radio" name="op2" id="op2" value="3" />
+                                <label for="op3">IMAX</label>
+                                <input type="radio" name="op2" id="op2" value="4" />
+                                <label for="op4">4DX</label>
+                            </p>
+                            <br />
+                            <select>
+                                <option>選擇電影院</option></br>
+                                <option>斗六環球中華影城</option>
+                                <option>虎尾白宮影城</option>
+                                <option>嘉義秀泰影城</option>
+                                <option>嘉年華影城</option>
+                            </select>
+                            <br />
+                            <select>
+                                <option>選擇場次</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                            </select>
+                            <br />
+                            <select>
+                                <option>選擇座位（排）</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                            </select>
+                            <br />
+                            <select>
+                                <option>選擇座位（號）</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                            </select>
+                            <br />
+                            <select>
+                                <option>選擇餐飲/優惠套餐</option>
+                                <option>無</option>
+                                <option>爆米花（單點）</option>
+                                <option>吉拿棒（單點）</option>
+                                <option>可樂（單點）</option>
+                                <option>雪碧（單點）</option>
+                                <option>A套餐（爆米花 + 可樂/雪碧）</option>
+                                <option>B套餐（爆米花 + 吉拿棒 + 可樂/雪碧）</option>
+                                <option>C套餐（爆米花*2 + 可樂/雪碧*2）</option>
+                                <option>D套餐（爆米花*3 + 可樂/雪碧*3）</option>
+                            </select>
+                            <br />
+                        </fieldset>
+                        <p class="btn">
+                            <input type="reset" value="清除">
+                            <input type="submit" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div class="right">
+                    <div class="up">
+                        <div class="up-left">
+                            <div class="title">
+                                線上電影：
+                            </div>
+                            <div class="data">
+                                <ul>
+                                    <li>天能</li>
+                                    <li>月老</li>
+                                    <li>蜘蛛人：無家日</li>
+                                    <li>獵魂者</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="up-right">
+                            <div class="title">
+                                電影院：
+                            </div>
+                            <div class="data">
+                                <ul>
+                                    <li>斗六環球中華影城</li>
+                                    <li>虎尾白宮影城</li>
+                                    <li>嘉義秀泰影城</li>
+                                    <li>嘉年華影城</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="down">
+                        <div class="down-left">
+                            <div class="title">
+                                場次時間：
+                            </div>
+                            <div class="data">
+                                <ul>
+                                    <li>A---凌晨</li>
+                                    <li>B---早上</li>
+                                    <li>C---中午</li>
+                                    <li>D---下午</li>
+                                    <li>E---夜晚</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="down-right">
+                            <div class="title">
+                                餐飲/優惠套餐：
+                            </div>
+                            <div class="data">
+                                <ul>
+                                    <li>爆米花（單點）</li>
+                                    <li>吉拿棒（單點）</li>
+                                    <li>可樂（單點）</li>
+                                    <li>雪碧（單點）</li>
+                                    <li>
+                                        A套餐<br />
+                                        （爆米花 + 可樂/雪碧）
+                                    </li>
+                                    <li>
+                                        B套餐<br />
+                                        （爆米花 + 吉拿棒 + 可樂/雪碧）
+                                    </li>
+                                    <li>
+                                        C套餐<br />
+                                        （爆米花*2 + 可樂/雪碧*2）
+                                    </li>
+                                    <li>
+                                        D套餐<br />
+                                        （爆米花*3 + 可樂/雪碧*3）
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer">
+            Made by TC. AlphaSato. WLUN.
+        </div>
+    </div>
+</body>
+
+</html>
