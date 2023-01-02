@@ -1,6 +1,5 @@
 import flask
 import datetime
-import os
 
 from module.base import Base
 
@@ -9,8 +8,9 @@ class User(Base):
     def __init__(self,userdbPath):
         super().__init__(userdbPath)
         self.isdbconnect=False if self.database==None else True
+        self.uuidDict=dict()
 
-    def handelUserLogin(self):
+    def userLogin(self):
         if self.isdbconnect==False:
             flask.flash('資料庫問題，請聯繫管理員','error')
             return False,None
@@ -23,17 +23,22 @@ class User(Base):
             flask.flash('帳號或密碼有誤','error')
             return False,None
         else:
+            # 成功登入 
             expiretime=datetime.datetime.now()+datetime.timedelta(days=7)
-            token=os.urandom(32).hex()
-            flask.session[request['username']]=token
+            uuid=Base.hashCal(request['username'])
+            flask.session[uuid]=True
             flask.session.permanent=True
+            self.uuidDict[request['username']]=uuid
             cookie=flask.make_response(flask.redirect('/'))
-            cookie.set_cookie('token',token,expires=expiretime)
-            cookie.set_cookie('username',request['username'],expires=expiretime)
+            cookie.set_cookie('uuid',uuid,expires=expiretime)
             return True,cookie
     
-    def islogin(self):
-        return True if flask.session.get(flask.request.cookies.get('username'))==flask.request.cookies.get('token') else False
+    def isLogin(self):
+        return True if flask.session.get(flask.request.cookies.get('uuid')) else False
 
-
-        
+    def userLogout(self):
+        flask.session[flask.request.cookies.get('uuid')]=False
+        self.uuidDict.pop(flask.request.cookies.get('uuid'))
+        resp=flask.make_response(flask.redirect('/'))
+        resp.delete_cookie('uuid')
+        return resp

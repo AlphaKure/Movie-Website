@@ -47,12 +47,16 @@
         </div>-->
         <div class="o"></div>
         <div class="user">
+            {% if not isLogin() %}
             <a href="/login" target="_self">
                 登入
-            </a><!--
+            </a>
+            {% endif %}
+            {% if isLogin() %}
             <a href="/logout" target="_self">
                 登出
-            </a>-->
+            </a>
+            {% endif %}
         </div>
     </nav>
 </div>
