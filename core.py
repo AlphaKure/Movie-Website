@@ -1,10 +1,13 @@
 import flask
-from module import user
+import os
+
+from module import user,session
 
 app=flask.Flask(__name__)
 
-userManager=user.User('./database/user.sqlite')
-print(userManager.isdbconnect)
+sessionManager=session.Session()
+userManager=user.User('./database/user.sqlite',sessionManager=sessionManager)
+
 
 @app.route('/')
 def main():
@@ -14,12 +17,20 @@ def main():
 def login():
     if flask.request.method=='GET':
         return flask.render_template('login.html')
-    isLogin=userManager.handelUserLogin()
+    isLogin,cookie=userManager.handelUserLogin()
     if not isLogin:
         return flask.redirect('/login')
     else:
-        return flask.redirect('/')
+        return cookie
+    
+@app.route('/check')
+def check():
+    return flask.jsonify(sessionManager.islogin())
 
-app.secret_key="movie-website"
+@app.route('/session')
+def sessions():
+    return flask.jsonify(sessionManager.tokenlist)
+
+app.secret_key=os.urandom(16).hex()
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8000,debug=True)
