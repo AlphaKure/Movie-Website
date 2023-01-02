@@ -1,12 +1,14 @@
 import flask
 import os
+import logging
+import datetime
 
-from module import user,session
+from module import user
 
 app=flask.Flask(__name__)
-
-sessionManager=session.Session()
-userManager=user.User('./database/user.sqlite',sessionManager=sessionManager)
+app.logger.setLevel(logging.INFO)
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=7)
+userManager=user.User('./database/user.sqlite')
 
 
 @app.route('/')
@@ -25,11 +27,8 @@ def login():
     
 @app.route('/check')
 def check():
-    return flask.jsonify(sessionManager.islogin())
+    return flask.jsonify({'message':userManager.islogin()})
 
-@app.route('/session')
-def sessions():
-    return flask.jsonify(sessionManager.tokenlist)
 
 app.secret_key=os.urandom(16).hex()
 if __name__ == '__main__':

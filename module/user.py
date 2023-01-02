@@ -1,16 +1,15 @@
 import flask
 import datetime
+import os
 
-from module.session import Session
 from module.base import Base
 
 class User(Base):
 
-    def __init__(self,userdbPath,sessionManager:Session):
+    def __init__(self,userdbPath):
         super().__init__(userdbPath)
         self.isdbconnect=False if self.database==None else True
-        self.session=sessionManager
-    
+
     def handelUserLogin(self):
         if self.isdbconnect==False:
             flask.flash('資料庫問題，請聯繫管理員','error')
@@ -25,10 +24,16 @@ class User(Base):
             return False,None
         else:
             expiretime=datetime.datetime.now()+datetime.timedelta(days=7)
-            token=self.session.addToken(request['username'])
+            token=os.urandom(32).hex()
+            flask.session[request['username']]=token
+            flask.session.permanent=True
             cookie=flask.make_response(flask.redirect('/'))
             cookie.set_cookie('token',token,expires=expiretime)
             cookie.set_cookie('username',request['username'],expires=expiretime)
             return True,cookie
+    
+    def islogin(self):
+        return True if flask.session.get(flask.request.cookies.get('username'))==flask.request.cookies.get('token') else False
+
 
         
