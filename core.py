@@ -8,11 +8,11 @@ from module import user
 app=flask.Flask(__name__)
 app.logger.setLevel(logging.INFO)
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=7)
-userManager=user.User('./database/user.sqlite')
+userManager=user.UserManager('./database/user.sqlite')
 
 @app.template_global()
 def isLogin():
-    return userManager.isLogin()
+    return userManager.loginAuth()
 
 @app.route('/')
 def main():
@@ -22,20 +22,20 @@ def main():
 def login():
     if flask.request.method=='GET':
         return flask.render_template('login.html')
-    isLogin,cookie=userManager.userLogin()
-    if not isLogin:
-        return flask.redirect('/login')
-    else:
-        return cookie
+    return userManager.userLogin()
     
 @app.route('/logout')
 def logout():
     return userManager.userLogout()
 
+@app.route('/register')
+def register():
+    return flask.render_template('/register.html')
+
 '''Test for session 
 @app.route('/uuid')
 def uuid():
-    return flask.jsonify({'message':userManager.uuidDict})
+    return flask.jsonify({'message':flask.session.get(flask.request.cookies.get('uuid'))})
 '''
 app.secret_key=os.urandom(16).hex()
 if __name__ == '__main__':
