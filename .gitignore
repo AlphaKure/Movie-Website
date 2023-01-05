@@ -153,3 +153,4 @@ cython_debug/
 
 #folder
 NOT FINISH/*
+.vscode/*
