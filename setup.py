@@ -3,7 +3,7 @@ import configparser
 from module.base import Base
 
 
-def setupcheck()->bool:
+def setupCheck()->bool:
     config=configparser.ConfigParser()
     config.read('./setting.ini')
 
@@ -11,16 +11,18 @@ def setupcheck()->bool:
 def userDBCreate():
     userDB=sqlite3.connect('./database/user.sqlite')
     userDB.cursor()
-    userDB.execute('CREATE TABLE IF NOT EXISTS account(username TEXT NOT NULL PRIMARY KEY,password TEXT NOT NULL,isAdmin INTEGER NOT NULL )')
+    userDB.execute('CREATE TABLE IF NOT EXISTS account(username TEXT NOT NULL PRIMARY KEY,password TEXT NOT NULL,email TEXT NOT NULL,nickname TEXT,isAdmin INTEGER NOT NULL)')
     userDB.commit()
 
-def addAdminaccount(username,password):
+def addAdminAccount(username,password,email,nickname):
     userDB=sqlite3.connect('./database/user.sqlite')
     userDB.cursor()
-    userDB.execute('INSERT INTO account VALUES(?,?,1)',(username,password))
+    userDB.execute('INSERT INTO account VALUES(?,?,?,?,1)',(username,password,email,nickname))
     userDB.commit()
 
-if __name__=='__main__':
+if __name__=='__main__': 
     adminUsername=input('Username:')
     adminPassword=Base.hashCal(input('Password:'))
-    addAdminaccount(adminUsername,adminPassword)
+    adminEmail=input('Email:')
+    adminNickname=input('nickname:')
+    addAdminAccount(adminUsername,adminPassword,adminEmail,adminNickname)
