@@ -8,13 +8,10 @@ class UserManager(Base):
 
     def __init__(self,DBPath)->None:
         super().__init__(DBPath)
-        self.isDBconnect=False if self.database==None else True
 
     def userLogin(self)->flask.Response:
+        self.databaseState()
         resp=flask.make_response(flask.redirect('/login'))
-        if self.isDBconnect==False:
-            flask.flash('資料庫問題，請聯繫管理員','error')
-            return resp
         request=flask.request.form.to_dict()
         self.database.cursor()
         if (request['username'],) not in self.database.execute('SELECT username FROM account').fetchall():
@@ -44,8 +41,23 @@ class UserManager(Base):
         return resp
     
     def userRegister(self):
+        self.databaseState()
+        self.database.cursor()
+        resp=flask.make_response(flask.redirect('/register'))
         request=flask.request.form.to_dict()
-        
+        if request['password']!=request['confirmPassword']:
+            flask.flash('密碼不一致',category='error')
+            return resp
+        if self.database.execute('SELECT * FROM account WHERE username=?',(request['account'],)).fetchone()!=None:
+            flask.flash('帳號已存在',category='error')
+            return resp
+        # 都沒問題 以後可以再增加密碼複雜驗證etc
+        self.database.execute('INSERT INTO account(username,password,email,isAdmin) VALUES(?,?,?,0)',(request['account'],self.hashCal(request['password']),request['email']))
+        self.database.commit()
+        resp=flask.make_response(flask.redirect('/login'))
+        flask.flash('註冊成功!請重新登入',category='info')
+        return resp
+            
 
 class User:
 

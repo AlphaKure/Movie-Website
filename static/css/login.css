@@ -138,7 +138,8 @@ body .nav a {
 }
 
 .login input[type='text'],
-.login input[type='password'] {
+.login input[type='password'],
+.login input[type='email']{
     border: 2px solid #3498db;
     width: 220px;
 }

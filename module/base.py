@@ -1,7 +1,7 @@
 import os
 import sqlite3
 import hashlib
-
+import flask
 
 class Base:
 
@@ -10,6 +10,10 @@ class Base:
     def __init__(self,databasePath=None) -> None:
         if databasePath:
             self.database=self.databaseConnect(databasePath)
+
+    def databaseState(self) -> None:
+        if self.database==None: # 出現異常
+            flask.flash('資料庫錯誤，請聯繫管理員',category='error')
 
     @staticmethod
     def databaseConnect(dbPath)->sqlite3.Connection|None:

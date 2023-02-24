@@ -28,9 +28,11 @@ def login():
 def logout():
     return userManager.userLogout()
 
-@app.route('/register')
+@app.route('/register',methods=['GET','POST'])
 def register():
-    return flask.render_template('/register.html')
+    if flask.request.method=='GET':
+        return flask.render_template('/register.html')
+    return userManager.userRegister()
 
 '''Test for session 
 @app.route('/uuid')
